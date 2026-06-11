@@ -1,0 +1,6 @@
+{
+  "name": "Para Bruna",
+  "description": "Um portal de amor especial para Bruna com um buquê digital interativo e linha do tempo de memórias.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
