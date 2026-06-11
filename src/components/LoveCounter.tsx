@@ -18,10 +18,9 @@ interface TimeDifference {
 }
 
 export default function LoveCounter() {
-  // Let's set a default anniversary of Oct 12, 2024 (approx 1.5 - 2 years ago relative to local time June 2026)
   const [startDateStr, setStartDateStr] = useState(() => {
     const saved = localStorage.getItem("anniversary_date");
-    return saved || "2024-10-12T00:00:00";
+    return saved || "2026-04-17T00:00:00";
   });
 
   const [isEditing, setIsEditing] = useState(false);
