@@ -6,7 +6,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { INITIAL_MEMORIES } from "../data/romanticData";
 import { MemoryItem } from "../types";
-import { Calendar, Heart, MapPin, Edit3, Trash2, PlusCircle, Check, Image, Video, Sparkles, Upload, Maximize2, X } from "lucide-react";
+import { Calendar, Heart, MapPin, Edit3, Trash2, PlusCircle, Check, Image, Video, Sparkles, Upload, Maximize2, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const PRESET_GRADIENTS: Record<string, string> = {
@@ -125,6 +125,37 @@ export default function Timeline() {
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleExportMemories = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(memories, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "memorias-buh.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
+  const handleImportMemories = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const imported = JSON.parse(reader.result as string);
+        if (Array.isArray(imported)) {
+          setMemories(imported);
+          alert("Memórias importadas com sucesso! Não se esqueça de salvar/atualizar.");
+        } else {
+          alert("Erro: O arquivo selecionado não contém um formato de memórias válido.");
+        }
+      } catch (err) {
+        alert("Erro ao ler o arquivo JSON.");
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -287,6 +318,30 @@ export default function Timeline() {
           >
             <Trash2 className="h-4 w-4" /> Restaurar Versão Padrão 🔄
           </button>
+        </div>
+
+        {/* EXPORT / IMPORT BACKUP ACTIONS */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mt-3">
+          <button
+            onClick={handleExportMemories}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-600 font-sans text-xs font-bold transition-all shadow-xs cursor-pointer"
+            title="Baixar backup das memórias para enviar ou salvar"
+          >
+            <Download className="h-3.5 w-3.5" /> Exportar Memórias (Backup)
+          </button>
+
+          <label
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-600 font-sans text-xs font-bold transition-all shadow-xs cursor-pointer"
+            title="Carregar arquivo de memórias exportado por outro aparelho"
+          >
+            <Upload className="h-3.5 w-3.5" /> Importar Memórias (Arquivo)
+            <input
+              type="file"
+              accept=".json"
+              onChange={handleImportMemories}
+              className="hidden"
+            />
+          </label>
         </div>
       </div>
 
