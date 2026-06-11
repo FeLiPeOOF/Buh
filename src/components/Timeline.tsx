@@ -18,7 +18,7 @@ const PRESET_GRADIENTS: Record<string, string> = {
 
 export default function Timeline() {
   const [memories, setMemories] = useState<MemoryItem[]>(() => {
-    const saved = localStorage.getItem("love_timeline_memories");
+    const saved = localStorage.getItem("love_timeline_memories_v2");
     return saved ? JSON.parse(saved) : INITIAL_MEMORIES;
   });
 
@@ -37,7 +37,7 @@ export default function Timeline() {
 
   // Save memories to localStorage
   useEffect(() => {
-    localStorage.setItem("love_timeline_memories", JSON.stringify(memories));
+    localStorage.setItem("love_timeline_memories_v2", JSON.stringify(memories));
   }, [memories]);
 
   // Escape key to close lightbox
@@ -267,13 +267,25 @@ export default function Timeline() {
         </AnimatePresence>
 
         {/* RECTANGLE BLOCK TO ADD A MEMORY CAROUSEL CHIP */}
-        <div className="flex justify-center mt-6">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
           <button
             onClick={handleAddNewMemory}
             className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-love-600 to-rose-500 hover:from-love-700 hover:to-rose-600 text-white font-serif font-bold text-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
             id="add-memory-milestone-btn"
           >
             <PlusCircle className="h-4.5 w-4.5" /> Adicionar Nova Memória ou Foto Juntos 💖
+          </button>
+          <button
+            onClick={() => {
+              if (confirm("Deseja restaurar a linha do tempo para a versão padrão do código? Isso apagará qualquer alteração não salva no código do projeto.")) {
+                localStorage.removeItem("love_timeline_memories_v2");
+                setMemories(INITIAL_MEMORIES);
+              }
+            }}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-neutral-100 hover:bg-neutral-200 text-neutral-600 font-serif font-semibold text-xs transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+            id="reset-memory-milestone-btn"
+          >
+            <Trash2 className="h-4 w-4" /> Restaurar Versão Padrão 🔄
           </button>
         </div>
       </div>
