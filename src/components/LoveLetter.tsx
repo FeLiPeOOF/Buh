@@ -11,12 +11,21 @@ export default function LoveLetter() {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [letterContent, setLetterContent] = useState(() => {
-    const saved = localStorage.getItem("romantic_love_letter");
-    return saved || "Minha linda Bruna,\n\nEscrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.\n\nDesde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.\n\nObrigado por ser minha parceira de aventuras, minha melhor amiga e o grande amor da minha vida. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.\n\nCom todo o amor que cabe na minha alma,\nSeu Felipe ❤️";
+    try {
+      const saved = localStorage.getItem("romantic_love_letter");
+      return saved || "Minha linda Bruna,\n\nEscrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.\n\nDesde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.\n\nObrigado por ser minha parceira de aventuras, minha melhor amiga e o grande amor da minha vida. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.\n\nCom todo o amor que cabe na minha alma,\nSeu Felipe ❤️";
+    } catch (e) {
+      console.error("Failed to load love letter from localStorage:", e);
+      return "Minha linda Bruna,\n\nEscrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.\n\nDesde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.\n\nObrigado por ser minha parceira de aventuras, minha melhor amiga e o grande amor da minha vida. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.\n\nCom todo o amor que cabe na minha alma,\nSeu Felipe ❤️";
+    }
   });
 
   const handleSaveLetter = () => {
-    localStorage.setItem("romantic_love_letter", letterContent);
+    try {
+      localStorage.setItem("romantic_love_letter", letterContent);
+    } catch (e) {
+      console.error("Failed to save love letter to localStorage:", e);
+    }
     setIsEditing(false);
   };
 

@@ -18,8 +18,18 @@ const PRESET_GRADIENTS: Record<string, string> = {
 
 export default function Timeline() {
   const [memories, setMemories] = useState<MemoryItem[]>(() => {
-    const saved = localStorage.getItem("love_timeline_memories_v2");
-    return saved ? JSON.parse(saved) : INITIAL_MEMORIES;
+    try {
+      const saved = localStorage.getItem("love_timeline_memories_v2");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.error("Failed to load memories from localStorage:", e);
+    }
+    return INITIAL_MEMORIES;
   });
 
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -37,7 +47,11 @@ export default function Timeline() {
 
   // Save memories to localStorage
   useEffect(() => {
-    localStorage.setItem("love_timeline_memories_v2", JSON.stringify(memories));
+    try {
+      localStorage.setItem("love_timeline_memories_v2", JSON.stringify(memories));
+    } catch (e) {
+      console.error("Failed to save memories to localStorage:", e);
+    }
   }, [memories]);
 
   // Escape key to close lightbox
@@ -309,7 +323,11 @@ export default function Timeline() {
           <button
             onClick={() => {
               if (confirm("Deseja restaurar a linha do tempo para a versão padrão do código? Isso apagará qualquer alteração não salva no código do projeto.")) {
-                localStorage.removeItem("love_timeline_memories_v2");
+                try {
+                  localStorage.removeItem("love_timeline_memories_v2");
+                } catch (e) {
+                  console.error("Failed to remove memories from localStorage:", e);
+                }
                 setMemories(INITIAL_MEMORIES);
               }
             }}

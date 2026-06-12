@@ -19,8 +19,13 @@ interface TimeDifference {
 
 export default function LoveCounter() {
   const [startDateStr, setStartDateStr] = useState(() => {
-    const saved = localStorage.getItem("anniversary_date");
-    return saved || "2026-04-17T00:00:00";
+    try {
+      const saved = localStorage.getItem("anniversary_date");
+      return saved || "2026-04-17T00:00:00";
+    } catch (e) {
+      console.error("Failed to load anniversary date from localStorage:", e);
+      return "2026-04-17T00:00:00";
+    }
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -122,7 +127,11 @@ export default function LoveCounter() {
     if (!tempDate) return;
     const cleanDate = `${tempDate}T00:00:00`;
     setStartDateStr(cleanDate);
-    localStorage.setItem("anniversary_date", cleanDate);
+    try {
+      localStorage.setItem("anniversary_date", cleanDate);
+    } catch (e) {
+      console.error("Failed to save anniversary date to localStorage:", e);
+    }
     setIsEditing(false);
   };
 
