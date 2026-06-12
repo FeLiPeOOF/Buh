@@ -23,7 +23,14 @@ export default function Timeline() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          return parsed;
+          // Restore initial mediaUrl if it was omitted to save localStorage space
+          return parsed.map((mem) => {
+            const initial = INITIAL_MEMORIES.find((i) => i.id === mem.id);
+            if (initial && mem.mediaUrl === undefined) {
+              return { ...mem, mediaUrl: initial.mediaUrl };
+            }
+            return mem;
+          });
         }
       }
     } catch (e) {
@@ -48,7 +55,16 @@ export default function Timeline() {
   // Save memories to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem("love_timeline_memories_v2", JSON.stringify(memories));
+      const sanitizedMemories = memories.map((mem) => {
+        const initial = INITIAL_MEMORIES.find((i) => i.id === mem.id);
+        if (initial && initial.mediaUrl === mem.mediaUrl) {
+          // Omit the mediaUrl if it matches the initial default memory's image to save space
+          const { mediaUrl, ...rest } = mem;
+          return rest;
+        }
+        return mem;
+      });
+      localStorage.setItem("love_timeline_memories_v2", JSON.stringify(sanitizedMemories));
     } catch (e) {
       console.error("Failed to save memories to localStorage:", e);
     }
