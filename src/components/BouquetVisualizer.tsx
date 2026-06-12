@@ -148,8 +148,8 @@ export default function BouquetVisualizer({
   const tiePointY = isMini ? 220 : 255;       // 255
   const bottomStemY = isMini ? 305 : 340;     // 340
 
-  return (
-    <div className={`relative select-none ${className}`} id="realistic-bouquet-visualizer">
+  const visualizerContent = (
+    <div className="relative w-[320px] h-[380px]" id="realistic-bouquet-visualizer-content">
       {/* 1. WRAPPING BACKGROUND PAPER (z-10, behind stems and flowers) */}
       <div className="absolute inset-0 pointer-events-none z-10">
         {wrapType === "velvet-rose" && (
@@ -580,6 +580,34 @@ export default function BouquetVisualizer({
           })()}
         </svg>
       )}
+    </div>
+  );
+
+  if (isMini) {
+    return (
+      <div
+        className={`relative select-none overflow-hidden ${className}`}
+        style={{
+          width: "224px",
+          height: "270px",
+        }}
+        id="realistic-bouquet-visualizer-mini"
+      >
+        <div
+          style={{
+            transform: "scale(0.7)",
+            transformOrigin: "top left",
+          }}
+        >
+          {visualizerContent}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative select-none ${className}`} id="realistic-bouquet-visualizer">
+      {visualizerContent}
     </div>
   );
 }

@@ -445,8 +445,8 @@ export default function Timeline() {
                         type="button"
                         onClick={() => setEditMediaType(opt.id as any)}
                         className={`flex-1 py-1.5 flex items-center justify-center gap-1 border rounded-lg font-sans text-xs font-bold transition ${editMediaType === opt.id
-                            ? "bg-love-600 text-white border-love-600"
-                            : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
+                          ? "bg-love-600 text-white border-love-600"
+                          : "bg-white text-neutral-700 border-neutral-200 hover:bg-neutral-50"
                           }`}
                       >
                         <opt.icon className="h-3.5 w-3.5" />
