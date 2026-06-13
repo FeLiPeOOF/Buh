@@ -13,10 +13,28 @@ export default function LoveLetter() {
   const [letterContent, setLetterContent] = useState(() => {
     try {
       const saved = localStorage.getItem("romantic_love_letter");
-      return saved || "Minha linda Bruna,\n\nEscrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.\n\nDesde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.\n\nObrigado por ser minha parceira de aventuras, minha melhor amiga e o grande amor da minha vida. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.\n\nCom todo o amor que cabe na minha alma,\nSeu Felipe ❤️";
+      return saved || `Minha linda Buh,
+
+Escrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.
+
+Desde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.
+
+Olhando para nós dois, entendo perfeitamente o que os cantores querem dizer quando falam de "encontrar a metade da laranja" ou de um amor que "inunda a alma". Você é a minha dose diária de felicidade. Prometo estar aqui para cantar os dias alegres com você e para segurar sua mão quando a música da vida ficar um pouco mais lenta. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.
+
+Com todo o amor que cabe na minha alma,
+Seu Felipe ❤️`;
     } catch (e) {
       console.error("Failed to load love letter from localStorage:", e);
-      return "Minha linda Bruna,\n\nEscrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.\n\nDesde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.\n\nObrigado por ser minha parceira de aventuras, minha melhor amiga e o grande amor da minha vida. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.\n\nCom todo o amor que cabe na minha alma,\nSeu Felipe ❤️";
+      return `Minha linda Buh,
+
+Escrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.
+
+Desde que você entrou na minha vida, os dias ganharam mais cor, os risos ficaram mais altos e o futuro finalmente passou a ter a cara que eu sempre sonhei. Cada detalhe seu — a sua risada doce, o jeito que seu olhar encontra o meu nos momentos de silêncio e o aconchego do seu abraço — me faz ter a certeza absoluta de que sou a pessoa mais sortuda do universo por poder amar você.
+
+Olhando para nós dois, entendo perfeitamente o que os cantores querem dizer quando falam de "encontrar a metade da laranja" ou de um amor que "inunda a alma". Você é a minha dose diária de felicidade. Prometo estar aqui para cantar os dias alegres com você e para segurar sua mão quando a música da vida ficar um pouco mais lenta. Que este seja apenas mais um dentre as centenas de Dias dos Namorados que comemoraremos bem juntinhos.
+
+Com todo o amor que cabe na minha alma,
+Seu Felipe ❤️`;
     }
   });
 
