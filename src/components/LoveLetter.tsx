@@ -12,7 +12,7 @@ export default function LoveLetter() {
   const [isEditing, setIsEditing] = useState(false);
   const [letterContent, setLetterContent] = useState(() => {
     try {
-      const saved = localStorage.getItem("romantic_love_letter");
+      const saved = sessionStorage.getItem("romantic_love_letter");
       return saved || `Minha linda Buh,
 
 Escrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.
@@ -24,7 +24,7 @@ Olhando para nós dois, entendo perfeitamente o que os cantores querem dizer qua
 Com todo o amor que cabe na minha alma,
 Seu Felipe ❤️`;
     } catch (e) {
-      console.error("Failed to load love letter from localStorage:", e);
+      console.error("Failed to load love letter from sessionStorage:", e);
       return `Minha linda Buh,
 
 Escrever para você é como tentar traduzir em palavras o nascer do sol: faltam termos para descrever tamanha beleza, calor e paz.
@@ -40,9 +40,9 @@ Seu Felipe ❤️`;
 
   const handleSaveLetter = () => {
     try {
-      localStorage.setItem("romantic_love_letter", letterContent);
+      sessionStorage.setItem("romantic_love_letter", letterContent);
     } catch (e) {
-      console.error("Failed to save love letter to localStorage:", e);
+      console.error("Failed to save love letter to sessionStorage:", e);
     }
     setIsEditing(false);
   };

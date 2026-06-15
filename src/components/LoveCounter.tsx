@@ -20,10 +20,10 @@ interface TimeDifference {
 export default function LoveCounter() {
   const [startDateStr, setStartDateStr] = useState(() => {
     try {
-      const saved = localStorage.getItem("anniversary_date");
+      const saved = sessionStorage.getItem("anniversary_date");
       return saved || "2026-04-17T00:00:00";
     } catch (e) {
-      console.error("Failed to load anniversary date from localStorage:", e);
+      console.error("Failed to load anniversary date from sessionStorage:", e);
       return "2026-04-17T00:00:00";
     }
   });
@@ -128,9 +128,9 @@ export default function LoveCounter() {
     const cleanDate = `${tempDate}T00:00:00`;
     setStartDateStr(cleanDate);
     try {
-      localStorage.setItem("anniversary_date", cleanDate);
+      sessionStorage.setItem("anniversary_date", cleanDate);
     } catch (e) {
-      console.error("Failed to save anniversary date to localStorage:", e);
+      console.error("Failed to save anniversary date to sessionStorage:", e);
     }
     setIsEditing(false);
   };

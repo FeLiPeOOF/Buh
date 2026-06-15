@@ -19,11 +19,11 @@ const PRESET_GRADIENTS: Record<string, string> = {
 export default function Timeline() {
   const [memories, setMemories] = useState<MemoryItem[]>(() => {
     try {
-      const saved = localStorage.getItem("love_timeline_memories_v2");
+      const saved = sessionStorage.getItem("love_timeline_memories_v2");
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          // Restore initial mediaUrl if it was omitted to save localStorage space
+          // Restore initial mediaUrl if it was omitted to save sessionStorage space
           return parsed.map((mem) => {
             const initial = INITIAL_MEMORIES.find((i) => i.id === mem.id);
             if (initial && mem.mediaUrl === undefined) {
@@ -34,7 +34,7 @@ export default function Timeline() {
         }
       }
     } catch (e) {
-      console.error("Failed to load memories from localStorage:", e);
+      console.error("Failed to load memories from sessionStorage:", e);
     }
     return INITIAL_MEMORIES;
   });
@@ -52,7 +52,7 @@ export default function Timeline() {
   const [editPreset, setEditPreset] = useState("rose-love");
   const [selectedMemory, setSelectedMemory] = useState<MemoryItem | null>(null);
 
-  // Save memories to localStorage
+  // Save memories to sessionStorage
   useEffect(() => {
     try {
       const sanitizedMemories = memories.map((mem) => {
@@ -64,9 +64,9 @@ export default function Timeline() {
         }
         return mem;
       });
-      localStorage.setItem("love_timeline_memories_v2", JSON.stringify(sanitizedMemories));
+      sessionStorage.setItem("love_timeline_memories_v2", JSON.stringify(sanitizedMemories));
     } catch (e) {
-      console.error("Failed to save memories to localStorage:", e);
+      console.error("Failed to save memories to sessionStorage:", e);
     }
   }, [memories]);
 
@@ -340,9 +340,9 @@ export default function Timeline() {
             onClick={() => {
               if (confirm("Deseja restaurar a linha do tempo para a versão padrão do código? Isso apagará qualquer alteração não salva no código do projeto.")) {
                 try {
-                  localStorage.removeItem("love_timeline_memories_v2");
+                  sessionStorage.removeItem("love_timeline_memories_v2");
                 } catch (e) {
-                  console.error("Failed to remove memories from localStorage:", e);
+                  console.error("Failed to remove memories from sessionStorage:", e);
                 }
                 setMemories(INITIAL_MEMORIES);
               }

@@ -120,7 +120,7 @@ export default function App() {
   // Quiz state
   const [quiz, setQuiz] = useState<QuizQuestion[]>(() => {
     try {
-      const saved = localStorage.getItem("love_quiz_questions");
+      const saved = sessionStorage.getItem("love_quiz_questions");
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && parsed.length === DEFAULT_QUIZ.length) {
@@ -128,7 +128,7 @@ export default function App() {
         }
       }
     } catch (e) {
-      console.error("Failed to load quiz from localStorage:", e);
+      console.error("Failed to load quiz from sessionStorage:", e);
     }
     return DEFAULT_QUIZ;
   });
