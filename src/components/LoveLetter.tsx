@@ -49,7 +49,7 @@ Seu Felipe ❤️`;
 
   return (
     <div className="w-full max-w-3xl mx-auto py-10 px-4 flex flex-col items-center" id="love-letter-section">
-      
+
       {/* Visual Seal Card Trigger */}
       <AnimatePresence mode="wait">
         {!isOpen ? (
@@ -64,10 +64,10 @@ Seu Felipe ❤️`;
           >
             {/* ENVELOPE DECORATIVE SHELL */}
             <div className="bg-amber-100 hover:bg-amber-150 rounded-3xl p-8 border-2 border-amber-200/60 shadow-lg flex flex-col items-center text-center relative overflow-hidden group hover:shadow-xl transition-all duration-300">
-              
+
               {/* Envelope diagonal triangles */}
               <div className="absolute top-0 inset-x-0 h-40 bg-linear-to-b from-amber-50 to-amber-100/30 clip-path-polygon" />
-              
+
               <div className="w-16 h-16 rounded-full bg-rose-50 border border-rose-100/50 flex items-center justify-center text-love-500 mb-6 shadow-sm relative group-hover:scale-105 transition-transform duration-300">
                 {/* Sealing wax stamp heart emoji */}
                 <span className="text-2xl">💌</span>
@@ -80,7 +80,7 @@ Seu Felipe ❤️`;
               <p className="font-sans text-[11px] md:text-xs text-amber-700/80 font-bold uppercase tracking-wider mb-4">
                 Selada com amor • Toque para abrir
               </p>
-              
+
               <p className="font-serif italic text-sm text-amber-800 leading-relaxed max-w-sm mt-3 opacity-90">
                 "Não existem palavras suficientes no dicionário que possam expressar o que meu peito transborda por você..."
               </p>
@@ -110,7 +110,7 @@ Seu Felipe ❤️`;
               <span className="font-sans text-xs font-bold text-amber-700 uppercase tracking-widest flex items-center gap-1.5">
                 <FileText className="h-4 w-4" /> Carta Escrita à Mão
               </span>
-              
+
               {/* Operational controls */}
               <div className="flex gap-1.5">
                 <button
