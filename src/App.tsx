@@ -116,7 +116,7 @@ const DEFAULT_QUIZ: QuizQuestion[] = [
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<"us" | "bouquet" | "timeline" | "quiz">("us");
-  
+
   // Quiz state
   const [quiz, setQuiz] = useState<QuizQuestion[]>(() => {
     try {
@@ -164,7 +164,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-love-50 text-neutral-800 font-sans relative overflow-x-hidden selection:bg-love-200 p-3 md:p-6 lg:p-8">
-      
+
       {/* FLOAT HEARTS BACKGROUND LAYERS */}
       <div className="absolute inset-x-0 top-0 bottom-0 pointer-events-none overflow-hidden z-0 bg-transparent">
         {hearts.map((h) => (
@@ -220,11 +220,10 @@ export default function App() {
                     setActiveTab(tab.id as any);
                     setQuizFinished(false);
                   }}
-                  className={`flex items-center gap-1 px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
-                    activeTab === tab.id
+                  className={`flex items-center gap-1 px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${activeTab === tab.id
                       ? "bg-gradient-to-r from-love-600 to-rose-500 text-white shadow-2xs scale-102"
                       : "text-love-900 hover:text-love-700 hover:bg-love-100/60"
-                  }`}
+                    }`}
                   id={`tab-btn-${tab.id}`}
                 >
                   <tab.icon className="h-3.5 w-3.5 shrink-0" />
@@ -246,14 +245,14 @@ export default function App() {
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
           >
-            
+
             {/* TAB 1: OUR CORNER (COUNTER, LETTER, MUSIC PLAYER) */}
             {activeTab === "us" && (
               <div className="flex flex-col gap-6" id="tab-our-corner">
-                
+
                 {/* First Row: Counters & Highlights */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                  
+
                   {/* Anniversary Ticker */}
                   <div className="lg:col-span-7 flex">
                     <LoveCounter />
@@ -287,7 +286,7 @@ export default function App() {
 
                 {/* Second Row: Interactive letter and realtime music synthesizer */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                  
+
                   {/* Synthesis Audio player column */}
                   <div className="lg:col-span-5 flex flex-col gap-6" id="audio-panel-box">
                     <div className="bg-white/80 rounded-3xl p-6 border border-love-100/60 shadow-xs">
@@ -357,7 +356,7 @@ export default function App() {
                   {quiz.map((q, idx) => {
                     const chosen = userAnswers[q.id];
                     const isCorrect = chosen === q.correctIdx;
-                    
+
                     return (
                       <div
                         key={q.id}
@@ -376,11 +375,10 @@ export default function App() {
                                 key={cIdx}
                                 disabled={quizFinished}
                                 onClick={() => handleAnswerQuiz(q.id, cIdx)}
-                                className={`px-4.5 py-3 rounded-xl border font-sans text-xs text-left transition duration-300 font-bold ${
-                                  isSelected
+                                className={`px-4.5 py-3 rounded-xl border font-sans text-xs text-left transition duration-300 font-bold ${isSelected
                                     ? "bg-love-600 text-white border-love-600 shadow-xs"
                                     : "bg-love-50/10 text-slate-800 border-slate-100 hover:bg-love-50"
-                                } ${quizFinished ? "cursor-not-allowed" : "cursor-pointer"}`}
+                                  } ${quizFinished ? "cursor-not-allowed" : "cursor-pointer"}`}
                               >
                                 {choice}
                               </button>
@@ -390,9 +388,8 @@ export default function App() {
 
                         {/* Fun fact revealing */}
                         {quizFinished && (
-                          <div className={`mt-3 p-3 rounded-xl flex gap-2 items-start text-xs font-sans leading-relaxed ${
-                            isCorrect ? "bg-emerald-50 border border-emerald-250 text-emerald-800" : "bg-rose-50 border border-rose-200 text-rose-800"
-                          }`}>
+                          <div className={`mt-3 p-3 rounded-xl flex gap-2 items-start text-xs font-sans leading-relaxed ${isCorrect ? "bg-emerald-50 border border-emerald-250 text-emerald-800" : "bg-rose-50 border border-rose-200 text-rose-800"
+                            }`}>
                             {isCorrect ? (
                               <>
                                 <CheckCircle className="h-4.5 w-4.5 shrink-0 text-emerald-500 mt-0.5" />
@@ -404,7 +401,7 @@ export default function App() {
                               <>
                                 <span className="text-rose-500 font-bold shrink-0">✕</span>
                                 <div>
-                                  <span className="font-bold">Ups!</span> A resposta correta era: <span className="underline font-bold">{q.choices[q.correctIdx]}</span>. <br/>
+                                  <span className="font-bold">Ups!</span> A resposta correta era: <span className="underline font-bold">{q.choices[q.correctIdx]}</span>. <br />
                                   <span className="italic mt-1 block opacity-90">{q.funFact}</span>
                                 </div>
                               </>
@@ -422,11 +419,10 @@ export default function App() {
                     <button
                       onClick={checkResults}
                       disabled={Object.keys(userAnswers).length < quiz.length}
-                      className={`px-8 py-3.5 rounded-2xl font-serif font-bold text-sm shadow-md transition duration-300 ${
-                        Object.keys(userAnswers).length < quiz.length
+                      className={`px-8 py-3.5 rounded-2xl font-serif font-bold text-sm shadow-md transition duration-300 ${Object.keys(userAnswers).length < quiz.length
                           ? "bg-neutral-100 text-neutral-400 border border-neutral-200 cursor-not-allowed"
                           : "bg-love-600 text-white hover:bg-love-700 cursor-pointer"
-                      }`}
+                        }`}
                       id="finish-quiz-btn"
                     >
                       Verificar Resultados do Amor 🥂
@@ -440,8 +436,8 @@ export default function App() {
                         Seu Resultado: {score} de {quiz.length} Acertos!
                       </h4>
                       <p className="text-xs font-sans text-love-650 max-w-sm leading-relaxed">
-                        {score === quiz.length 
-                          ? "Incrível! Bruna conhece cada detalhe do amor de vocês. Vocês são almas gêmeas perfeitas!" 
+                        {score === quiz.length
+                          ? "Incrível! Bruna conhece cada detalhe do amor de vocês. Vocês são almas gêmeas perfeitas!"
                           : "Vocês foram muito bem! O amor não se mede em pontos de quiz, mas sim nos abraços de cada novo amanhecer."}
                       </p>
                       <button
